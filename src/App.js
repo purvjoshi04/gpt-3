@@ -4,7 +4,6 @@ import {
   Footer,
   Blog,
   Possibility,
-  Feature,
   WhatGPT3,
   Header,
   Features,
