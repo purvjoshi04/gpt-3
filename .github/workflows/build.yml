@@ -6,7 +6,7 @@ on:
             - "**"
 
 jobs:
-    Cotinuous-Integration:
+    continuous-integration:
         name: Perform new push check in project
         runs-on: ubuntu:latest
 
