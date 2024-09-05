@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo docker pull purvjoshi/gpt3:latest
+            sudo docker pull purvjoshi/gpt3:latestt
             sudo docker stop web-app || true
             sudo docker rm web-app || true
             sudo docker run -d --name web-app -p 3005:3000 purvjoshi/gpt3:latest
