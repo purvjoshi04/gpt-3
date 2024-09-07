@@ -28,6 +28,24 @@ jobs:
       - name: Verify Pushed Image
         run: docker pull purvjoshi/gpt3:latest
 
+      - name: Install Docker (if not installed)
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            if ! command -v docker &> /dev/null
+            then
+                echo "Docker not found. Installing Docker..."
+                curl -fsSL https://get.docker.com -o get-docker.sh
+                sudo sh get-docker.sh
+                sudo usermod -aG docker $USER
+                sudo systemctl start docker
+                sudo systemctl enable docker
+            else
+                echo "Docker is already installed."
+            fi
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
