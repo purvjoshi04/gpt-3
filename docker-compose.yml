@@ -1,0 +1,30 @@
+services:
+  web:
+    build: .
+    container_name: gpt_3_web
+    ports:
+      - "3000:3000"
+    networks:
+      - npm_network
+
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:2.12.3
+    container_name: nginx-proxy-manager
+    ports:
+      - 80:80
+      - 81:81
+      - 443:443
+    volumes:
+      - npm_data:/data
+      - npm_letsencrypt:/etc/letsencrypt
+    restart: unless-stopped
+    networks:
+      - npm_network
+
+volumes:
+  npm_data:
+  npm_letsencrypt:
+
+networks:
+  npm_network:
+    driver: bridge
